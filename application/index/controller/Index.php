@@ -9,6 +9,7 @@ class Index extends Controller
     {
 		// $this->valid();
 		$this->responseMsg();
+		exit;
     }
 
     public $games = [
