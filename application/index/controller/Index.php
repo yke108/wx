@@ -269,6 +269,7 @@ class Index extends Controller
 
     private function checkSignature()
     {
+    	file_put_contents("1.txt", json_encode($_GET));
         $signature = isset($_GET["signature"]) ? $_GET["signature"] : '';
         $timestamp = isset($_GET["timestamp"]) ? $_GET["timestamp"] : '';
         $nonce = isset($_GET["nonce"]) ? $_GET["nonce"] : '';
