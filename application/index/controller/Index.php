@@ -7,8 +7,8 @@ class Index extends Controller
 	//入口
     public function index()
     {
-		$this->valid();
-		// $this->responseMsg();
+		// $this->valid();
+		$this->responseMsg();
     }
 
     public $games = [
@@ -159,7 +159,7 @@ class Index extends Controller
                     $arr['act_code'] = $keyword;
                     $arr['value'] = 1;
                     $arr['type'] = 'text';
-                    $arr['content'] = self::TIPS;
+                    $arr['content'] = implode("\n", $this->games);
 			}
             $add_data = array 
             (
@@ -195,10 +195,10 @@ class Index extends Controller
                         'update_time' => time(),
                         );
                     $ret = M('User_info')->add($add_data);
-                    $contentStr = "你好，欢迎关注【别当真】玩游戏！\n" . self::TIPS;
+                    $contentStr = "你好，欢迎关注【别当真】玩游戏！\n" . implode("\n", $this->games);
                 } else {
                     M('User_info')->where("open_id = '{$open_id}'")->save(array("status" => 1, "update_time" => time()));
-                    $contentStr = "你好，欢迎回来！\n" . self::TIPS;
+                    $contentStr = "你好，欢迎回来！\n" . implode("\n", $this->games);
                 }
 
                 break;
