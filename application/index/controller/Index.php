@@ -30,6 +30,7 @@ class Index extends Controller
                 
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
             $RX_TYPE = trim($postObj->MsgType);
+            file_put_contents('1.txt', $RX_TYPE);
 
             switch($RX_TYPE)
             {
