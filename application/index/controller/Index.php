@@ -163,13 +163,13 @@ class Index extends Controller
                     $arr['type'] = 'text';
                     $arr['content'] = implode("\n", $this->games);
 			}
-            $add_data = array 
-            (
-                'user_id'  => $user_info['user_id'],
-                'act_code' => $arr['act_code'],
-                'value'    => $arr['value'],
-                'add_time' => time(),
-            );
+            // $add_data = array 
+            // (
+            //     'user_id'  => $user_info['user_id'],
+            //     'act_code' => $arr['act_code'],
+            //     'value'    => $arr['value'],
+            //     'add_time' => time(),
+            // );
             // M('Action_log')->add($add_data);
             // M('User_info')->where("user_id={$user_info['user_id']}")->save(array('credit' => $user_info['credit'] + $arr['value']));
             if($arr['type'] == "news")
