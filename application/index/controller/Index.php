@@ -52,17 +52,17 @@ class Index extends Controller
         if(!empty( $keyword ))
         {
             $open_id = (string)$postObj->FromUserName;
-            $user_info = M('User_info')->where("open_id='{$open_id}'")->find();
-            if (empty($user_info)) {
-                $user_info = [
-                    'open_id' => $open_id,
-                    'status'  => 1,
-                    'add_time' => time(),
-                    'update_time' => time(),
-                ];
-                $user_id = M('User_info')->add($user_info);
-                $user_info['user_id'] = $user_id;
-            }
+            // $user_info = M('User_info')->where("open_id='{$open_id}'")->find();
+            // if (empty($user_info)) {
+            //     $user_info = [
+            //         'open_id' => $open_id,
+            //         'status'  => 1,
+            //         'add_time' => time(),
+            //         'update_time' => time(),
+            //     ];
+            //     $user_id = M('User_info')->add($user_info);
+            //     $user_info['user_id'] = $user_id;
+            // }
 			switch ($keyword)
 			{
 				case 1:
@@ -141,7 +141,7 @@ class Index extends Controller
                     $arr['type'] = 'news';
                     break;
                 case 6:
-                    $action_list = M('Action_log')->where("user_id={$user_info['user_id']}")->select();
+                    // $action_list = M('Action_log')->where("user_id={$user_info['user_id']}")->select();
                     $actionStr = '';
                     $i = 1;
                     foreach($action_list as $v)
@@ -153,7 +153,7 @@ class Index extends Controller
                     $arr['act_code'] = "查询个人信息";
                     $arr['value'] = 0;
                     $arr['type'] = 'text';
-                    $arr['content'] = "尊敬的客户您好，你的个人信息如下\n-------------\n关注时间：" . date('Y-m-d H:i', $user_info['add_time']) . "\n-------------\n帐户积分：{$user_info['credit']}\n-------------\n我的行为日志：{$actionStr}\n-------------\n以上数据仅供参考。";
+                    $arr['content'] = "尊敬的客户您好，你的个人信息如下\n-------------\n关注时间：" . date('Y-m-d H:i') . "\n-------------\n帐户积分：\n-------------\n我的行为日志：{$actionStr}\n-------------\n以上数据仅供参考。";
                     break;
 				default :
                     $arr['act_code'] = $keyword;
@@ -168,8 +168,8 @@ class Index extends Controller
                 'value'    => $arr['value'],
                 'add_time' => time(),
             );
-            M('Action_log')->add($add_data);
-            M('User_info')->where("user_id={$user_info['user_id']}")->save(array('credit' => $user_info['credit'] + $arr['value']));
+            // M('Action_log')->add($add_data);
+            // M('User_info')->where("user_id={$user_info['user_id']}")->save(array('credit' => $user_info['credit'] + $arr['value']));
             if($arr['type'] == "news")
                 echo $this->responseNews($postObj, $articles);
             else
@@ -186,18 +186,18 @@ class Index extends Controller
             case "subscribe":
                 $open_id = (string)$object->FromUserName;
                 // 判断用户是否曾经关注过
-                $user_info = M('User_info')->where("open_id = '{$open_id}'")->find();
+                // $user_info = M('User_info')->where("open_id = '{$open_id}'")->find();
                 if(empty($user_info)) {
-                    $add_data = array(
-                        'open_id' => $open_id,
-                        'status'  => 1,
-                        'add_time' => time(),
-                        'update_time' => time(),
-                        );
-                    $ret = M('User_info')->add($add_data);
+                    // $add_data = array(
+                    //     'open_id' => $open_id,
+                    //     'status'  => 1,
+                    //     'add_time' => time(),
+                    //     'update_time' => time(),
+                    //     );
+                    // $ret = M('User_info')->add($add_data);
                     $contentStr = "你好，欢迎关注【别当真】玩游戏！\n" . implode("\n", $this->games);
                 } else {
-                    M('User_info')->where("open_id = '{$open_id}'")->save(array("status" => 1, "update_time" => time()));
+                    // M('User_info')->where("open_id = '{$open_id}'")->save(array("status" => 1, "update_time" => time()));
                     $contentStr = "你好，欢迎回来！\n" . implode("\n", $this->games);
                 }
 
@@ -206,7 +206,7 @@ class Index extends Controller
             // 用户取消关注时
             case "unsubscribe":
                 $open_id = (string)$object->FromUserName;
-                M('User_info')->where("open_id = '{$open_id}'")->save(array("status" => 0, "update_time" => time()));
+                // M('User_info')->where("open_id = '{$open_id}'")->save(array("status" => 0, "update_time" => time()));
                 break;
 
             default :
