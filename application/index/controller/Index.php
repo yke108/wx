@@ -146,12 +146,12 @@ class Index extends Controller
                     // $action_list = M('Action_log')->where("user_id={$user_info['user_id']}")->select();
                     $actionStr = '';
                     $i = 1;
-                    foreach($action_list as $v)
-                    {
-                        if($v['value'] < 1) continue;
-                        $act_code = substr($v['act_code'], 0, 24);
-                        $actionStr .= "\n" . $i++ . "、[+{$v['value']}]{$act_code}";
-                    }
+                    // foreach($action_list as $v)
+                    // {
+                    //     if($v['value'] < 1) continue;
+                    //     $act_code = substr($v['act_code'], 0, 24);
+                    //     $actionStr .= "\n" . $i++ . "、[+{$v['value']}]{$act_code}";
+                    // }
                     $arr['act_code'] = "查询个人信息";
                     $arr['value'] = 0;
                     $arr['type'] = 'text';
